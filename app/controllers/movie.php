@@ -127,9 +127,5 @@ class Movie extends Controller {
   
       return $reviews; // Return an array with the generated reviews
     }
-  
-    public function result() {
-      
-    }
-  
+
 }
