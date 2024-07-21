@@ -18,18 +18,18 @@ if (!isset($_SESSION['auth'])) {
     <body style="display:flex; flex-direction: column; min-height: 100vh">
 <nav class="navbar navbar-expand-lg" style="background-color: #bed7eb">
   <div class="container">
-    <a class="navbar-brand" href="/home">COSC 4806</a>
+    <a class="navbar-brand" href="/">COSC 4806</a>
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/home">Home</a>
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/reminders">Reminders</a>
+        <a class="nav-link active" href="#">Reminders</a>
       </li>
       <?
         if (isset($_SESSION['admin'])) { ?>
           <li class="nav-item">
-            <a class="nav-link active" href="/reports">Reports</a>
+            <a class="nav-link active" href="#">Reports</a>
           </li>
       <? }
       ?>
