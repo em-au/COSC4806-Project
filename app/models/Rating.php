@@ -13,7 +13,12 @@ class Rating {
 
   public function getRatings($movie) {
     $db = db_connect();
-    $statement = $db->prepare("SELECT rating FROM ratings WHERE movie = :movie");
+    $statement = $db->prepare("SELECT u.username, r.rating, r.date_added
+      FROM ratings as r
+      INNER JOIN users as u
+      ON r.user_id = u.id
+      WHERE movie = :movie
+      ORDER BY r.date_added DESC");
     $statement->bindParam(':movie', $movie);
     $statement->execute();
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);

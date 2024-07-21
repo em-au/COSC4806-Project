@@ -27,6 +27,11 @@ class Movie extends Controller {
     if ($movie['Response'] != "False") {
       $ratings = $this->model('Rating');
       $rows = $ratings->getRatings($title);
+      // Format the date
+      foreach ($rows as &$row) {
+        $timestamp = strtotime($row['date_added']);
+        $row['date_added'] = date("F j, Y", $timestamp);
+      }
     }
     
     $this->view('movie/result', ['movie' => $movie, 'ratings' => $rows]);
