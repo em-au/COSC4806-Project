@@ -30,7 +30,7 @@ class Movie extends Controller {
       $reviews = $this->get_reviews($movie['Title']);
     }
     else if ($movie['Response'] == "False") {
-      // SHOW ERROR MESSAGE NICELY
+      echo "not found";
     }
 
     $this->view('movie/result', ['movie' => $movie, 

@@ -8,7 +8,7 @@
     width:100%"
 
     <div style="margin-bottom: 0px">&copy; Emily Au <?php echo date('Y'); ?></div>
-    <div style="margin-bottom: 5px">See this project on: <a href="https://github.com/em-au/COSC4806-Project" style="color: black"><i class="fa-brands fa-github fa-xl"></i></a></div>
+    <div style="margin-bottom: 5px">See this project on: <a href="https://github.com/em-au/COSC4806-Project" target="_blank" style="color: black"><i class="fa-brands fa-github fa-xl"></i></a></div>
     
 </footer>
 
