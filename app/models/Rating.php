@@ -10,4 +10,13 @@ class Rating {
     $statement->bindParam(':rating', $rating);
     $statement->execute();
   }
+
+  public function getRatings($movie) {
+    $db = db_connect();
+    $statement = $db->prepare("SELECT rating FROM ratings WHERE movie = :movie");
+    $statement->bindParam(':movie', $movie);
+    $statement->execute();
+    $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+  }
 }

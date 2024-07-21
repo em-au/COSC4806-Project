@@ -6,23 +6,30 @@ class Movie extends Controller {
     $this->view('movie/index');
   }
 
+  // could add parameter movie title and then display results below search bar 
   public function search() {
     if (!isset($_REQUEST['movie'])) {
       header('location: /movie');
       die;
     }
 
+    // TO DO: display error msg if no movie found
+    // TO DO: what if multiple movies (eg inside out) - use s= instead of t=
+
+    
     $api = $this->model('Api');
     $title = $_REQUEST['movie'];
     // Replace spaces in movie title with hyphen
     $title = str_replace(" ", "-", $title);
     $movie = $api->search_movie($title);
 
-    // echo "<pre>";
-    // print_r($movie);
-    // die;
-
-    $this->view('movie/result', ['movie' => $movie]);
+    // If movie is found, get ratings of the movie from the model
+    if ($movie['Response'] != "False") {
+      $ratings = $this->model('Rating');
+      $rows = $ratings->getRatings($title);
+    }
+    
+    $this->view('movie/result', ['movie' => $movie, 'ratings' => $rows]);
   }
     /*
     View example
@@ -40,6 +47,7 @@ class Movie extends Controller {
       // urldecode() to handle any spaces in movie title
       $user_rating->addRating($_SESSION['user_id'], urldecode($movie), $rating);
       // want this to redirect back to search result page and not /movie/rating/title/4
+      header('location: ' . $_SERVER['HTTP_REFERER']); // goes back to /movie with search bar, not result
     }
   
 }

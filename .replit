@@ -1,11 +1,26 @@
+# run = "php -S 0.0.0.0:8000 -t ."
+# modules = ["php-8.2", "nix"]
+
+# [nix]
+# channel = "stable-24_05"
+
+# [deployment]
+# run = ["sh", "-c", "php -S 0.0.0.0:8000 -t ."]
+# deploymentTarget = "cloudrun"
+
+# [[ports]]
+# localPort = 8000
+# externalPort = 80
+
 run = "php -S 0.0.0.0:8000 -t ."
-modules = ["php-8.2", "nix"]
+
+entrypoint = "index.php"
 
 [nix]
-channel = "stable-24_05"
+channel = "stable-22_11"
 
 [deployment]
-run = ["sh", "-c", "php -S 0.0.0.0:8000 -t ."]
+run = ["php", "-S", "0.0.0.0:8000", "-t", "."]
 deploymentTarget = "cloudrun"
 
 [[ports]]

@@ -4,6 +4,9 @@
 ?> <!-- CHANGE HEADER -->
 
 <div class="container d-flex justify-content-center">
+    <?php if ($movie['Response'] == "False") {
+        echo "Movie not found! Please try another movie.";
+    } else { ?>
     <div class="container movie-image">
         <img src="<?php echo $movie['Poster']?>">
     </div>
@@ -43,7 +46,7 @@
             } ?>
         </div>
     </div>
-    
+    <?php } ?>
     
 </div>
 
