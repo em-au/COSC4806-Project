@@ -20,12 +20,19 @@
         
     <div class="container movie-rating d-flex flex-column justify-content-center align-items-center">
         <h5>Rate this movie</h5>
-        <div class="stars">
-            <a href="#"><i class="fa-regular fa-star fa-2xl"></i></a>
-            <a href="#"><i class="fa-regular fa-star fa-2xl"></i></a>
-            <a href="#"><i class="fa-regular fa-star fa-2xl"></i></a>
-            <a href="#"><i class="fa-regular fa-star fa-2xl"></i></a>
-            <a href="#"><i class="fa-regular fa-star fa-2xl"></i></a>
+        <div class="stars"> <!-- Add the correct links 
+            /movie/rating/?id=$movie['Title']/numstars
+            what about hyphens in title? -->
+            <a href="/movie/rating/<?php echo $movie['Title']?>/1">
+                <i class="fa-regular fa-star fa-2xl"></i></a>
+            <a href="/movie/rating/<?php echo $movie['Title']?>/2">
+                <i class="fa-regular fa-star fa-2xl"></i></a>
+            <a href="/movie/rating/<?php echo $movie['Title']?>/3">
+                <i class="fa-regular fa-star fa-2xl"></i></a>
+            <a href="/movie/rating/<?php echo $movie['Title']?>/4">
+                <i class="fa-regular fa-star fa-2xl"></i></a>
+            <a href="/movie/rating/<?php echo $movie['Title']?>/5">
+                <i class="fa-regular fa-star fa-2xl"></i></a>
         </div>
         <div>
             <?php foreach ($movie['Ratings'] as $rating) {

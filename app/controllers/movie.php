@@ -36,7 +36,10 @@ class Movie extends Controller {
     */
 
     public function rating($movie = '', $rating = '') {
-      
+      $user_rating = $this->model('Rating');
+      // urldecode() to handle any spaces in movie title
+      $user_rating->addRating($_SESSION['user_id'], urldecode($movie), $rating);
+      // want this to redirect back to search result page and not /movie/rating/title/4
     }
   
 }
