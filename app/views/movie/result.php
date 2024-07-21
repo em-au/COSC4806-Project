@@ -22,9 +22,8 @@
             <div><?php echo $movie['Plot']?></div>
             <div><?php echo $movie['Runtime']?></div>
             <div><?php echo $movie['Genre']?></div>
-            
         </div>
-            
+
         <div class="container movie-rating d-flex flex-column justify-content-center align-items-center">
             <h5>Rate this movie</h5>
             <div class="stars">
@@ -49,22 +48,36 @@
             </div>
         </div>
     </div>
-    <div class="container user-ratings d-flex flex-column">
-        <h5>User Ratings</h5>
-        <?php 
-            // No user ratings for this movie
-            if (empty($data['ratings'])) {
-                echo "There are no ratings for this movie.";
-            }
-            else {
-                foreach ($data['ratings'] as $rating) { 
-                    // Change display from number to showing stars
-                    echo $rating['username'] . " - " . $rating['date_added'] . 
-                        "<br>" . $rating['rating'] . "<br><br>";
+
+    <div class="container ratings-reviews d-flex">
+        <div class="container user-ratings d-flex flex-column">
+            <h5>User Ratings</h5>
+            <?php 
+                // No user ratings for this movie
+                if (empty($data['ratings'])) {
+                    echo "There are no ratings for this movie.";
                 }
-            }
-        ?>
+                else {
+                    foreach ($data['ratings'] as $rating) { 
+                        // Change display from number to showing stars
+                        echo $rating['username'] . " - " . $rating['date_added'] . 
+                            "<br>" . $rating['rating'] . "<br><br>";
+                    }
+                }
+            ?>
+        </div>
+
+        <div class="container user-ratings d-flex flex-column">
+            <h5>Reviews</h5>
+            <?php
+                foreach ($reviews as $review) {
+                    echo "test";
+                }
+            ?>
+        </div>
     </div>
+              
+    <a href="/movie/reviews/<?php echo $movie['Title']?>">Reviews</a>
     <?php } // Closure of else statement for condition where movie is found ?> 
     
 </div>

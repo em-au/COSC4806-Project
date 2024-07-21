@@ -11,11 +11,8 @@ class Api {
     return $movie;
   }
 
-  public function get_review($title) {
+  public function get_review($title, $opinion) {
     $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=" . $_ENV['GEMINI'];
-
-    $movie_opinions = array("amazing", "good", "average", "bad", "awful", 
-                            "boring", "interesting");
 
     $data = array(
       "contents" => array(
@@ -24,7 +21,7 @@ class Api {
           "parts" => array(
             array(
               "text" => 'Write a short review for the movie ' . $title . 
-                ' as someone who thought the movie was' . $movie_opinions[rand(0, 6)]
+                ' as someone who thought the movie was' . $opinion 
             )
           )
         )
@@ -42,9 +39,9 @@ class Api {
       echo 'Curl error: ' . curl_error($ch);
     }
 
-    echo "<pre>";
-    echo $response;
-    die;
+    // Convert response to associative array
+    $review = json_decode($response, true);
+    return $review;
   }
 
 }
