@@ -63,6 +63,20 @@
 		unset($_SESSION['locked']);
 	}
 ?>
+
+	<?php
+		if (isset($_SESSION['login_to_rate'])) { ?>
+			<br>
+			<br>
+			<div class="alert alert-warning" role="alert">
+					You must be logged in to leave a rating!
+			</div>
+		<?php }
+		else {
+			unset($_SESSION['login_to_rate']);
+		}
+	?>
+	
 <br>
 </div>
 </div>

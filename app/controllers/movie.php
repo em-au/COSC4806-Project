@@ -32,6 +32,10 @@ class Movie extends Controller {
         $timestamp = strtotime($row['date_added']);
         $row['date_added'] = date("F j, Y", $timestamp);
       }
+
+      // Get the user's rating of this movie (if any) 
+      $user_rating = $this->user_rating($movie['Title']);
+      
     }
 
     // If movie is found, generate reviews of the movie --> MOVE TO SEPARATE FXN?
@@ -49,7 +53,10 @@ class Movie extends Controller {
       $reviews[$i] = $review_text;
     }
 
-    $this->view('movie/result', ['movie' => $movie, 'ratings' => $rows, 'reviews' => $reviews]);
+    $this->view('movie/result', ['movie' => $movie, 
+                'ratings' => $rows, 
+                'user_rating' => $user_rating,
+                'reviews' => $reviews]);
   }
     /*
     View example
@@ -63,10 +70,17 @@ class Movie extends Controller {
     */
 
     public function rating($movie = '', $rating = '') {
+      // If user is not logged in, redirect to Login page
+      if (!isset($_SESSION['auth'])) {
+        header('location: /login');
+        $_SESSION['login_to_rate'] = 1;
+        die;
+      }
+
       $user_rating = $this->model('Rating');
       // urldecode() to handle any spaces in movie title
       $title = urldecode($movie);
-      $user_rating->addRating($_SESSION['user_id'], $title, $rating);
+      $user_rating->add_rating($_SESSION['user_id'], $title, $rating);
       // want this to redirect back to search result page and not /movie/rating/title/4
       //header('location: /movie/result'); // goes back to /movie with search bar, not result
       $api = $this->model('Api');
@@ -108,6 +122,12 @@ class Movie extends Controller {
     public function reviews($movie = '') {
       
       //$this->view('movie/result', ['reviews' => $reviews]);
+    }
+
+    public function user_rating($movie) {
+      $user_rating = $this->model('Rating');
+      $row = $user_rating->getUserRating($movie, $_SESSION['user_id']);
+      return $row['rating'];
     }
   
 }

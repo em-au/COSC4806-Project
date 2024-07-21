@@ -26,7 +26,8 @@
     }
 
     .stars {
-        margin-bottom: 30px;
+        margin-top: 10px;
+        margin-bottom: 40px;
     }
 
     .card {
@@ -75,18 +76,28 @@
         </div>
 
         <div class="movie-rating col-3 d-flex flex-column justify-content-center align-items-center">
-            <h5>Rate this movie</h5>
+            <? if (empty($data['user_rating'])) { echo "<h5>Rate this movie</h5>"; } else { echo "<h5>You rated this</h5>"; } ?>
             <div class="stars">
                 <a href="/movie/rating/<?php echo $movie['Title']?>/1">
-                    <i class="fa-regular fa-star fa-2xl"></i></a>
+                    <? if ($data['user_rating'] < 1) { ?>
+                        <i class="fa-regular fa-star fa-2xl" style="color: #f0327b"></i><? }
+                    else { ?><i class="fa-solid fa-star fa-2xl" style="color: #f0327b;"></i><? } ?></a>
                 <a href="/movie/rating/<?php echo $movie['Title']?>/2">
-                    <i class="fa-regular fa-star fa-2xl"></i></a>
+                    <? if ($data['user_rating'] < 2) { ?>
+                        <i class="fa-regular fa-star fa-2xl" style="color: #f0327b"></i><? }
+                    else { ?><i class="fa-solid fa-star fa-2xl" style="color: #f0327b;"></i><? } ?></a>
                 <a href="/movie/rating/<?php echo $movie['Title']?>/3">
-                    <i class="fa-regular fa-star fa-2xl"></i></a>
+                    <? if ($data['user_rating'] < 3) { ?>
+                        <i class="fa-regular fa-star fa-2xl" style="color: #f0327b"></i><? }
+                    else { ?><i class="fa-solid fa-star fa-2xl" style="color: #f0327b;"></i><? } ?></a>
                 <a href="/movie/rating/<?php echo $movie['Title']?>/4">
-                    <i class="fa-regular fa-star fa-2xl"></i></a>
+                    <? if ($data['user_rating'] < 4) { ?>
+                        <i class="fa-regular fa-star fa-2xl" style="color: #f0327b"></i><? }
+                    else { ?><i class="fa-solid fa-star fa-2xl" style="color: #f0327b;"></i><? } ?></a>
                 <a href="/movie/rating/<?php echo $movie['Title']?>/5">
-                    <i class="fa-regular fa-star fa-2xl"></i></a>
+                    <? if ($data['user_rating'] < 5) { ?>
+                        <i class="fa-regular fa-star fa-2xl" style="color: #f0327b"></i><? }
+                    else { ?><i class="fa-solid fa-star fa-2xl" style="color: #f0327b;"></i><? } ?></a>
             </div>
             <div class="scores d-flex gap-4">
                 <div class="score d-flex flex-column align-items-center">
