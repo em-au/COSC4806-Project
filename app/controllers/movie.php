@@ -94,7 +94,7 @@ class Movie extends Controller {
         "boring", "interesting");
 
         // Get random number of reviews
-        $num_reviews = rand(2,5);
+        $num_reviews = rand(2,4);
         for ($i = 0; $i < $num_reviews; $i++) {
           $response = $api->get_review($movie_for_review, $movie_opinions[rand(0,6)]);
           // Grab only the text part of the response

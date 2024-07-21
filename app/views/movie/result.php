@@ -8,6 +8,11 @@
         margin-top: 30px;
     }
 
+    .movie-info {
+        gap: 50px;
+        padding: 0px;
+    }
+
     .movie-year {
         font-size: 20px;
     }
@@ -26,12 +31,25 @@
 
     .card {
         margin-bottom: 5px;
+        background-color: transparent;
+        color: #e8e8e8;
+        border: none;
     }
+
+    .user-ratings {
+        gap: 10px;
+    }
+
+    .rating-date {
+        font-size: 12px;
+    }
+
 </style>
 
 
-<div class="container container-main d-flex flex-column justify-content-center gap-5">
-    <div class="movie-info d-flex justify-content-center gap-3">
+<div class="container container-main d-flex flex-column justify-content-between gap-5">
+<div class="row">
+    <div class="movie-info d-flex justify-content-center"> <!-- use col for responsiveness-->
         <?php 
         $movie = $data['movie']; 
         // No movie was found
@@ -56,7 +74,7 @@
             </div>
         </div>
 
-        <div class="movie-rating d-flex flex-column justify-content-center align-items-center" style="width:500px">
+        <div class="movie-rating col-3 d-flex flex-column justify-content-center align-items-center">
             <h5>Rate this movie</h5>
             <div class="stars">
                 <a href="/movie/rating/<?php echo $movie['Title']?>/1">
@@ -87,8 +105,26 @@
             </div>
         </div>
     </div>
-<div class="row"
-    <div class="container ratings-reviews d-flex">
+</div>
+              
+<div class="row">
+    <div class="container ratings-reviews d-flex gap-5">
+        <div class="col-8 user-ratings d-flex flex-column">
+            <h5>What critics have said about this movie</h5>
+            <?php
+                foreach ($data['reviews'] as $review) { ?>
+                   <span class="border-bottom"></span>
+                   <div class="card">
+                     <div class="card-body">
+                       <? echo "<p>$review</p>"; ?>
+                     </div>
+                   </div>
+                    <?
+
+                }
+            ?> 
+        </div>
+        
         <div class="col-4 user-ratings d-flex flex-column">
             <h5>User Ratings</h5>
             <?php 
@@ -97,28 +133,21 @@
                     echo "There are no ratings for this movie.";
                 }
                 else {
-                    foreach ($data['ratings'] as $rating) { 
-                        // Change display from number to showing stars
-                        echo $rating['username'] . " - " . $rating['date_added'] . 
-                            "<br>" . $rating['rating'] . "<br><br>";
-                    }
-                }
+                    foreach ($data['ratings'] as $rating) { ?>
+                       <div class="single-user-rating">
+                            <div class="user-rating-item"><? echo $rating['username']?></div>
+                            <div class="user-rating-item rating-date"><? echo $rating['date_added']?></div>
+                            <div class="user-rating-item stars-group d-flex">              
+                                <?php
+                                    for ($i = 0; $i < $rating['rating']; $i++) { ?>
+                                        <i class="fa-solid fa-star" style="color: #f0327b;"></i> 
+                                    <? } ?> 
+                                <br>
+                            </div>
+                       </div>
+                <? }
+                } 
             ?>
-        </div>
-
-        <div class="col-8 user-ratings d-flex flex-column">
-            <h5>What critics have said about this movie</h5>
-            <?php
-                foreach ($data['reviews'] as $review) { ?>
-                   <div class="card">
-                     <div class="card-body">
-                       <? echo "<p>$review</p>"; ?>
-                     </div>
-                   </div>
-                    <?
-                    
-                }
-            ?> 
         </div>
     </div>
 </div>
