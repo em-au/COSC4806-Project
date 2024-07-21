@@ -6,16 +6,11 @@ class Movie extends Controller {
     $this->view('movie/index');
   }
 
-  // could add parameter movie title and then display results below search bar 
   public function search() {
     if (!isset($_REQUEST['movie'])) {
       header('location: /movie');
       die;
     }
-
-    // TO DO: display error msg if no movie found
-    // TO DO: what if multiple movies (eg inside out) - use s= instead of t=
-
     
     $api = $this->model('Api');
     $title = $_REQUEST['movie'];
@@ -23,51 +18,26 @@ class Movie extends Controller {
     $title = str_replace(" ", "-", $title);
     $movie = $api->search_movie($title);
 
-    // If movie is found, get ratings of the movie from the model --> MOVE TO SEPARATE FXN?
+    // A movie was found
     if ($movie['Response'] != "False") {
-      $ratings = $this->model('Rating');
-      $rows = $ratings->getRatings($title);
-      // Format the date
-      foreach ($rows as &$row) {
-        $timestamp = strtotime($row['date_added']);
-        $row['date_added'] = date("F j, Y", $timestamp);
-      }
+      // Get ratings from all users for this movie
+      $all_ratings = $this->get_ratings($movie['Title']);
 
-      // Get the user's rating of this movie (if any) 
-      $user_rating = $this->user_rating($movie['Title']);
-      
+      // Get the current user's rating of the movie 
+      $user_rating = $this->get_user_rating($movie['Title']);
+
+      // Get AI-generated reviews of the movie
+      $reviews = $this->get_reviews($movie['Title']);
     }
-
-    // If movie is found, generate reviews of the movie --> MOVE TO SEPARATE FXN?
-    //$api = $this->model('Api');
-    $movie_for_review = $movie['Title'];
-    $movie_opinions = array("amazing", "good", "average", "bad", "awful", 
-    "boring", "interesting");
-
-    // Get random number of reviews
-    $num_reviews = rand(2,5);
-    for ($i = 0; $i < $num_reviews; $i++) {
-      $response = $api->get_review($movie_for_review, $movie_opinions[rand(0,6)]);
-      // Grab only the text part of the response
-      $review_text = $response['candidates'][0]['content']['parts'][0]['text'];
-      $reviews[$i] = $review_text;
+    else if ($movie['Response'] == "False") {
+      // SHOW ERROR MESSAGE NICELY
     }
 
     $this->view('movie/result', ['movie' => $movie, 
-                'ratings' => $rows, 
+                'ratings' => $all_ratings, 
                 'user_rating' => $user_rating,
                 'reviews' => $reviews]);
   }
-    /*
-    View example
-    under search bar:
-    search button
-    Movie Details
-    Rating - leave one --> a href="/movie/rating/barbie/4"
-      link not a form - when user goes here, grab the movie title and rating number
-      and add to db (ensure that number value is correct)
-        save userid, movie name, rating
-    */
 
     public function rating($movie = '', $rating = '') {
       // If user is not logged in, redirect to Login page
@@ -78,6 +48,11 @@ class Movie extends Controller {
       }
 
       $user_rating = $this->model('Rating');
+
+      // If user has already rated this movie, delete the old rating first
+      if ($user_rating->getUserRating($movie, $_SESSION['user_id'])) {
+        $user_rating->delete_rating($_SESSION['user_id'], $movie);
+      }
       // urldecode() to handle any spaces in movie title
       $title = urldecode($movie);
       $user_rating->add_rating($_SESSION['user_id'], $title, $rating);
@@ -119,15 +94,45 @@ class Movie extends Controller {
       $this->view('movie/result', ['movie' => $movie, 'ratings' => $rows, 'reviews' => $reviews]);
     }
 
-    public function reviews($movie = '') {
-      
-      //$this->view('movie/result', ['reviews' => $reviews]);
+    public function get_user_rating($movie) {
+      $user_rating = $this->model('Rating');
+      $row = $user_rating->getUserRating($_SESSION['user_id'], $movie);
+      return $row['rating'];
     }
 
-    public function user_rating($movie) {
-      $user_rating = $this->model('Rating');
-      $row = $user_rating->getUserRating($movie, $_SESSION['user_id']);
-      return $row['rating'];
+    public function get_ratings($movie) {
+      $ratings = $this->model('Rating');
+      $rows = $ratings->getRatings($movie);
+      // Format the date
+      foreach ($rows as &$row) {
+        $timestamp = strtotime($row['date_added']);
+        $row['date_added'] = date("F j, Y", $timestamp);
+      }
+      return $rows;
+    }
+
+    public function get_reviews($movie) {
+      $api = $this->model('Api');
+  
+      // Options for overall opinion of the movie
+      $movie_opinions = array("amazing", "good", "average", "bad", "awful", 
+                            "boring", "interesting");
+  
+      // Get random number of reviews to generate
+      $num_reviews = rand(2,4);
+      for ($i = 0; $i < $num_reviews; $i++) {
+        $response = $api->get_review($movie, $movie_opinions[rand(0,6)]);
+  
+        // Grab only the text part of the response
+        $review_text = $response['candidates'][0]['content']['parts'][0]['text'];
+        $reviews[$i] = $review_text;
+      }
+  
+      return $reviews; // Return an array with the generated reviews
+    }
+  
+    public function result() {
+      
     }
   
 }

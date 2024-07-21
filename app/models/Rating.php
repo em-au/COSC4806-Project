@@ -11,6 +11,14 @@ class Rating {
     $statement->execute();
   }
 
+  public function delete_rating($user_id, $movie) {
+    $db = db_connect();
+    $statement = $db->prepare("DELETE FROM ratings WHERE user_id = :user_id AND movie = :movie");
+    $statement->bindParam(':user_id', $user_id);
+    $statement->bindParam(':movie', $movie);
+    $statement->execute();
+  }
+
   // why am i suddenly using camelcase
   public function getRatings($movie) {
     $db = db_connect();
@@ -26,7 +34,7 @@ class Rating {
     return $rows;
   }
 
-  public function getUserRating($movie, $user_id) {
+  public function getUserRating($user_id, $movie) {
     $db = db_connect();
     $statement = $db->prepare("SELECT rating FROM ratings WHERE user_id = :user_id AND movie = :movie");
     $statement->bindParam(':user_id', $user_id);
