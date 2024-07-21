@@ -26,13 +26,6 @@ if (!isset($_SESSION['auth'])) {
       <li class="nav-item">
         <a class="nav-link active" href="#">Reminders</a>
       </li>
-      <?
-        if (isset($_SESSION['admin'])) { ?>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Reports</a>
-          </li>
-      <? }
-      ?>
       
     </ul>
     <div class="navbar-nav"><a class="nav-link active" href="/logout">Log out</a></div>
