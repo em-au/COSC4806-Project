@@ -70,10 +70,10 @@
         <div class="container user-ratings d-flex flex-column">
             <h5>Reviews</h5>
             <?php
-                foreach ($reviews as $review) {
-                    echo "test";
+                foreach ($data['reviews'] as $review) {
+                    echo "<p>$review</p>";
                 }
-            ?>
+            ?> 
         </div>
     </div>
               

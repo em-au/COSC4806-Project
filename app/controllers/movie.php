@@ -53,14 +53,12 @@ class Movie extends Controller {
     $num_reviews = rand(2,5);
     for ($i = 0; $i < $num_reviews; $i++) {
       $response = $api->get_review($movie_for_review, $movie_opinions[rand(0,6)]);
-      // Get only the text part of the response
+      // Grab only the text part of the response
       $review_text = $response['candidates'][0]['content']['parts'][0]['text'];
       $reviews[$i] = $review_text;
     }
-    echo "<pre>";
-    print_r($reviews); die;
-    
-    $this->view('movie/result', ['movie' => $movie, 'ratings' => $rows]);
+
+    $this->view('movie/result', ['movie' => $movie, 'ratings' => $rows, 'reviews' => $reviews]);
   }
     /*
     View example

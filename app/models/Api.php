@@ -20,7 +20,7 @@ class Api {
           "role" => "user",
           "parts" => array(
             array(
-              "text" => 'Write a short review for the movie ' . $title . 
+              "text" => 'Write a very short review for the movie ' . $title . 
                 ' as someone who thought the movie was' . $opinion 
             )
           )
