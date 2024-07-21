@@ -11,4 +11,8 @@ class Api {
     return $movie;
   }
 
+  public function get_review($title) {
+    
+  }
+
 }
