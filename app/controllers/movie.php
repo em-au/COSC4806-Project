@@ -11,23 +11,25 @@ class Movie extends Controller {
       header('location: /movie');
       die;
     }
-    
+
     $api = $this->model('Api');
     $title = $_REQUEST['movie'];
+    // Replace spaces in movie title with hyphen
+    $title = str_replace(" ", "-", $title);
     $movie = $api->search_movie($title);
-    
-    echo "<pre>";
-    print_r($movie);
-    die;
 
-    $this->view('movie/results', ['movie' => $movie]);
+    // echo "<pre>";
+    // print_r($movie);
+    // die;
+
+    $this->view('movie/result', ['movie' => $movie]);
   }
     /*
     View example
     under search bar:
     search button
     Movie Details
-    Rating - leave one --> a href="/movie/review/barbie/4"
+    Rating - leave one --> a href="/movie/rating/barbie/4"
       link not a form - when user goes here, grab the movie title and rating number
       and add to db (ensure that number value is correct)
         save userid, movie name, rating

@@ -10,5 +10,5 @@ class Api {
     $movie =  (array) $phpObj;
     return $movie;
   }
-  
+
 }
