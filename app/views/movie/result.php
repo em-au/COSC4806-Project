@@ -1,4 +1,4 @@
-<?php require_once 'app/views/templates/header.php' ?> <!-- CHANGE HEADER -->
+<?php require_once 'app/views/templates/headerAll.php' ?> <!-- CHANGE HEADER -->
 <style>
     .container {
         padding: 0px;
