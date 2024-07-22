@@ -17,6 +17,10 @@
     a {
         color: #944b4f
     }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
 </style>
 
 <div class="container container-main">
@@ -59,7 +63,6 @@
                 unset($_SESSION['password_mismatch']);
                 unset($_SESSION['password_too_short']);
                 ?>
-            <br>
             <button type="submit" class="btn btn-secondary border-0">Sign up</button>
         </fieldset>
         </form> 

@@ -17,6 +17,10 @@
 	a {
 		color: #944b4f
 	}
+
+	.form-group {
+			margin-bottom: 20px;
+	}
 </style>
 
 <div class="container container-main">
