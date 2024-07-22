@@ -1,9 +1,29 @@
 <?php require_once 'app/views/templates/headerPublic.php'?>
-<div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 80vh;">
+<style>
+	.container-main {
+		display: flex; 
+		flex-direction: column; 
+		justify-content: center; 
+		align-items: center; 
+		text-align: center; 
+		min-height: 80vh;
+	}
+	
+	.btn-secondary {
+		background-color: #f0327b;
+		border: none;
+	}
+
+	a {
+		color: #944b4f
+	}
+</style>
+
+<div class="container container-main">
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Login</h1>
+                <h2>Login</h2>
             </div>
         </div>
     </div>
@@ -40,7 +60,7 @@
 			?>
 			<br>	
 				 
-			<button type="submit" class="btn btn-primary" 
+			<button type="submit" class="btn btn-secondary border-0" 
 				<?php 
 				if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_end'])) { ?> disabled <?php } ?>>Login</button>
 			<br>

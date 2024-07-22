@@ -1,9 +1,29 @@
 <?php require_once 'app/views/templates/headerPublic.php'?>
-<div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 80vh;">
+<style>
+    .container-main {
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
+        text-align: center; 
+        min-height: 80vh;
+    }
+
+    .btn-secondary {
+        background-color: #f0327b;
+        border: none;
+    }
+
+    a {
+        color: #944b4f
+    }
+</style>
+
+<div class="container container-main">
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Create an account</h1>
+                <h2>Create an account</h2>
             </div>
         </div>
     </div>
@@ -40,16 +60,14 @@
                 unset($_SESSION['password_too_short']);
                 ?>
             <br>
-            <button type="submit" class="btn btn-primary">Sign up</button>
+            <button type="submit" class="btn btn-secondary border-0">Sign up</button>
         </fieldset>
         </form> 
   </div>
 </div>
-<footer>
-    <br>
-    <a href="/login">Already have an account? Log in here.</a>
-</footer>
 <br>
+<a href="/login">Already have an account? Log in here.</a>
+
 </div>
 <?php require_once 'app/views/templates/footer.php' ?>
     
