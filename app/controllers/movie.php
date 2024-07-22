@@ -59,7 +59,7 @@ class Movie extends Controller {
       }  
 
       // Check that the rating is an integer and between 1-5 (inclusive)
-      if (!is_int($rating) || $rating < 1 || $rating > 5) {
+      if (!ctype_digit($rating) || $rating < 1 || $rating > 5) {
         header('location: /movie');
         die;
       }
