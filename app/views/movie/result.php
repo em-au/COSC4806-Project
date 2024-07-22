@@ -51,15 +51,7 @@
 <div class="container container-main d-flex flex-column justify-content-between gap-5">
 <div class="row">
     <div class="movie-info d-flex justify-content-center"> <!-- use col for responsiveness-->
-        <?php 
-        $movie = $data['movie']; 
-        // No movie was found
-        if ($movie['Response'] == "False") {
-            echo "Movie not found!";
-        } 
-            
-        // Movie was found
-        else { ?>
+        <?php $movie = $data['movie']; ?>
         <div class="movie-image">
             <img src="<?php echo $movie['Poster']?>">
         </div>
@@ -162,8 +154,6 @@
         </div>
     </div>
 </div>
-              
-    <?php } // Closure of else statement for condition where movie is found ?> 
     
 </div>
 </div>

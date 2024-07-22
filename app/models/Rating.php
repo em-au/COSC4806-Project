@@ -44,9 +44,11 @@ class Rating {
     return $row;
   }
 
-  public function get_users_all_ratings($user_id) {
+  public function get_user_all_ratings($user_id) {
     $db = db_connect();
-    $statement = $db->prepare("SELECT * FROM ratings WHERE user_id = :user_id");
+    $statement = $db->prepare("SELECT * FROM ratings 
+      WHERE user_id = :user_id
+      ORDER BY movie");
     $statement->bindParam(':user_id', $user_id);
     $statement->execute();
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);

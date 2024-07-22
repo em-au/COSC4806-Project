@@ -20,7 +20,18 @@
         <button type="submit" class="btn btn-primary">Search</button>
       </fieldset>
     </form>
+    <?php
+      if (isset($_SESSION['no_movie'])) { ?>
+        <br>
+        <br>
+        <div class="alert alert-warning" role="alert">
+            No movie found!
+        </div>
+      <? }
+      unset($_SESSION['no_movie']);
+    ?>
   </div>
+
 </div>
 </div>
 

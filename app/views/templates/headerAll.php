@@ -16,13 +16,13 @@
     <body style="display:flex; flex-direction: column; min-height: 100vh">
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="/" style="color: #f0327b">Film Rate</a>
+    <a class="navbar-brand" href="/" style="color: #f0327b;">Film Rate</a>
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
         <a class="nav-link" aria-current="page" href="/">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/movie">Movies</a>
+        <a class="nav-link" href="/movie/my_ratings">My Ratings</a>
       </li>
 
     </ul>

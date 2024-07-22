@@ -30,7 +30,9 @@ class Movie extends Controller {
       $reviews = $this->get_reviews($movie['Title']);
     }
     else if ($movie['Response'] == "False") {
-      echo "not found";
+      $_SESSION['no_movie'] = 1;
+      header('location: /movie');
+      die;
     }
 
     $this->view('movie/result', ['movie' => $movie, 
@@ -82,7 +84,9 @@ class Movie extends Controller {
         $reviews = $this->get_reviews($movie['Title']);
       }
       else if ($movie['Response'] == "False") {
-        // SHOW ERROR MESSAGE NICELY
+        $_SESSION['no_movie'] = 1;
+        header('location: /movie');
+        die;
       }
 
       $this->view('movie/result', ['movie' => $movie, 
@@ -127,5 +131,11 @@ class Movie extends Controller {
   
       return $reviews; // Return an array with the generated reviews
     }
+
+  public function my_ratings() {
+    $ratings = $this->model('Rating');
+    $rows = $ratings->get_user_all_ratings($_SESSION['user_id']);
+    $this->view('movie/my_ratings', ['ratings' => $rows]);
+  }
 
 }
