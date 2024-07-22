@@ -26,6 +26,10 @@
         background: linear-gradient(to bottom right, #202021, #353536);
     }
 
+    .card-group {
+      margin-top: 20px;
+    }
+  
     .no-movie {
         color: #f25058;
         margin-top: 2px;
@@ -62,7 +66,7 @@
     
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
       <div class="col">
         <div class="card h-100">
           <div class="card-body" style="text-align: center">
