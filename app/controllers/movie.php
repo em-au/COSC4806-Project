@@ -53,18 +53,18 @@ class Movie extends Controller {
 
       $user_rating = $this->model('Rating');
       $movie_decoded = urldecode($movie); // Handle any spaces in movie title
+
+      // Check that the rating is an integer and between 1-5 (inclusive)
+      if (!ctype_digit($rating) || $rating < 1 || $rating > 5) {
+        header('location: /');
+        die;
+      }
       
       // If user has already rated this movie, delete the old rating first
       $row = $user_rating->getUserRating($_SESSION['user_id'], $movie_decoded);
       if (!empty($row)) {
         $user_rating->delete_rating($_SESSION['user_id'], $movie_decoded);
       }  
-
-      // Check that the rating is an integer and between 1-5 (inclusive)
-      if (!ctype_digit($rating) || $rating < 1 || $rating > 5) {
-        header('location: /movie');
-        die;
-      }
 
       // Add rating
       $user_rating->add_rating($_SESSION['user_id'], $movie_decoded, $rating);
