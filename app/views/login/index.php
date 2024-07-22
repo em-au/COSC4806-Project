@@ -70,7 +70,6 @@
 				 unset($_SESSION['username_exists']);
 				 unset($_SESSION['password_incorrect']); 
 			?>
-			<br>	
 				 
 			<button type="submit" class="btn btn-secondary border-0" 
 				<?php 
