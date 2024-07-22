@@ -41,7 +41,7 @@
     }
 
     .card {
-        margin-bottom: 5px;
+        margin-bottom: 3px;
         background-color: transparent;
         color: #e8e8e8;
         border: none;
@@ -121,15 +121,14 @@
                 <h5>What critics have said about this movie</h5>
                 <?php
                     foreach ($data['reviews'] as $review) { ?>
-                       <span class="border-bottom"></span>
                        <div class="card">
                          <div class="card-body">
-                            <p><? echo $review['text']?></p>
+                            <p><? if (strlen($review['text']) == 0 || strlen($review['name']) == 0) { echo "</div></div>"; continue; } 
+                                echo $review['text']; ?></p>
                             <p>- <i><? echo $review['name']?></i></p>
                          </div>
                        </div>
-                        <?
-    
+                <?
                     }
                 ?> 
             </div>
