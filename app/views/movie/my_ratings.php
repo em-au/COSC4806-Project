@@ -1,6 +1,6 @@
 <?php require_once 'app/views/templates/header.php' ?> <!-- CHANGE HEADER (only logged in)-->
 <style>
-    .container {
+    .container-main {
         margin-top: 20px;
         padding: 0px 50px;
     }
@@ -11,7 +11,7 @@
 </style>
 
 
-<div class="container">
+<div class="container container-main">
     <div class="row justify-content-center ratings-header">
         <div class="col-6" ><h5>My Ratings</h5></div>
     </div>
