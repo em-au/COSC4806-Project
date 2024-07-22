@@ -31,8 +31,8 @@ class Movie extends Controller {
     }
     else if ($movie['Response'] == "False") {
       $_SESSION['no_movie'] = 1;
-      header('location: /movie');
-      die;
+      header('location: /');
+      die; 
     }
 
     $this->view('movie/result', ['movie' => $movie, 
