@@ -3,7 +3,9 @@
 class Movie extends Controller {
   
   public function index() {
-    $this->view('movie/index');
+    $ratings = $this->model('Rating');
+    $rows = $ratings->get_user_all_ratings($_SESSION['user_id']);
+    $this->view('movie/index', ['ratings' => $rows]);
   }
 
   public function search() {
@@ -133,9 +135,7 @@ class Movie extends Controller {
     }
 
   public function my_ratings() {
-    $ratings = $this->model('Rating');
-    $rows = $ratings->get_user_all_ratings($_SESSION['user_id']);
-    $this->view('movie/my_ratings', ['ratings' => $rows]);
+
   }
 
 }
