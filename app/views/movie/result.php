@@ -124,7 +124,8 @@
                    <span class="border-bottom"></span>
                    <div class="card">
                      <div class="card-body">
-                       <? echo "<p>$review</p>"; ?>
+                        <p><? echo $review['text']?></p>
+                        <p>- <i><? echo $review['name']?></i></p>
                      </div>
                    </div>
                     <?

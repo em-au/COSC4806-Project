@@ -124,18 +124,19 @@ class Movie extends Controller {
       // Get random number of reviews to generate
       $num_reviews = rand(2,4);
       for ($i = 0; $i < $num_reviews; $i++) {
-        $response = $api->get_review($movie, $movie_opinions[rand(0,6)]);
+        $response_text = $api->get_review($movie, $movie_opinions[rand(0,6)]);
+        $response_name = $api->get_name();
   
-        // Grab only the text part of the response
-        $review_text = $response['candidates'][0]['content']['parts'][0]['text'];
-        $reviews[$i] = $review_text;
+        // Grab only the text part of the responses
+        $text = $response_text['candidates'][0]['content']['parts'][0]['text'];
+        $name = $response_name['candidates'][0]['content']['parts'][0]['text'];
+        $reviews[$i]['text'] = $text;
+        $reviews[$i]['name'] = $name;
       }
-  
+
       return $reviews; // Return an array with the generated reviews
     }
 
-  public function my_ratings() {
 
-  }
 
 }
