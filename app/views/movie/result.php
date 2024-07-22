@@ -6,6 +6,7 @@
     
     .container-main {
         margin-top: 30px;
+        padding: 0px 50px;
     }
 
     .movie-info {
@@ -15,10 +16,14 @@
 
     .movie-year {
         font-size: 20px;
+        margin-bottom: 10px;
     }
 
     .movie-plot {
+        border-top: 1px solid #f0327b;
+        padding-top: 3px;
         font-size: 18px;
+        margin-top: 10px;
     }
 
     .movie-small {
@@ -41,16 +46,11 @@
         gap: 10px;
     }
 
-    .rating-date {
-        font-size: 12px;
-    }
-
 </style>
-
 
 <div class="container container-main d-flex flex-column justify-content-between gap-5">
 <div class="row">
-    <div class="movie-info d-flex justify-content-center"> <!-- use col for responsiveness-->
+    <div class="movie-info d-flex justify-content-between">
         <?php $movie = $data['movie']; ?>
         <div class="movie-image">
             <img src="<?php echo $movie['Poster']?>">
@@ -138,8 +138,8 @@
                 else {
                     foreach ($data['ratings'] as $rating) { ?>
                        <div class="single-user-rating">
-                            <div class="user-rating-item"><? echo $rating['username']?></div>
-                            <div class="user-rating-item rating-date"><? echo $rating['date_added']?></div>
+                            <div class="user-rating-item"><? echo $rating['username'] . 
+                                " &#x2022; " . $rating['date_added']?></div>
                             <div class="user-rating-item stars-group d-flex">              
                                 <?php
                                     for ($i = 0; $i < $rating['rating']; $i++) { ?>
