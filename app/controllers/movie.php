@@ -3,6 +3,7 @@
 class Movie extends Controller {
   
   public function index() {
+    // Get all the movies and ratings that the user has given
     $ratings = $this->model('Rating');
     $rows = $ratings->get_user_all_ratings($_SESSION['user_id']);
     $this->view('movie/index', ['ratings' => $rows]);
@@ -61,7 +62,7 @@ class Movie extends Controller {
       }
       
       // If user has already rated this movie, delete the old rating first
-      $row = $user_rating->getUserRating($_SESSION['user_id'], $movie_decoded);
+      $row = $user_rating->get_user_rating($_SESSION['user_id'], $movie_decoded);
       if (!empty($row)) {
         $user_rating->delete_rating($_SESSION['user_id'], $movie_decoded);
       }  
@@ -99,13 +100,13 @@ class Movie extends Controller {
 
     public function get_user_rating($movie) {
       $user_rating = $this->model('Rating');
-      $row = $user_rating->getUserRating($_SESSION['user_id'], $movie);
+      $row = $user_rating->get_user_rating($_SESSION['user_id'], $movie);
       return $row['rating'];
     }
 
     public function get_ratings($movie) {
       $ratings = $this->model('Rating');
-      $rows = $ratings->getRatings($movie);
+      $rows = $ratings->get_ratings($movie);
       // Format the date
       foreach ($rows as &$row) {
         $timestamp = strtotime($row['date_added']);
@@ -117,14 +118,14 @@ class Movie extends Controller {
     public function get_reviews($movie) {
       $api = $this->model('Api');
   
-      // Options for overall opinion of the movie
+      // Options for overall opinion of the movie (will be chosen by random)
       $movie_opinions = array("amazing", "good", "average", "bad", "awful", 
-                            "boring", "interesting");
+                            "boring", "interesting", "unique");
   
-      // Get random number of reviews to generate
+      // Get random number (between 2-4) of reviews to generate
       $num_reviews = rand(2,4);
       for ($i = 0; $i < $num_reviews; $i++) {
-        $response_text = $api->get_review($movie, $movie_opinions[rand(0,6)]);
+        $response_text = $api->get_review($movie, $movie_opinions[rand(0,7)]);
         $response_name = $api->get_name();
   
         // Grab only the text part of the responses

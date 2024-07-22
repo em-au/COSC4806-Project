@@ -1,4 +1,4 @@
-<?php require_once 'app/views/templates/header.php' ?> <!-- CHANGE HEADER (only logged in)-->
+<?php require_once 'app/views/templates/header.php' ?>
 <style>
     .container-main {
         margin-top: 20px;

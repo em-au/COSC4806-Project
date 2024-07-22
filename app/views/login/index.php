@@ -21,6 +21,14 @@
 	.form-group {
 			margin-bottom: 20px;
 	}
+
+	.signup-success {
+		color: green;
+	}
+	
+	.login-error {
+		color: #f0327b;
+	}
 </style>
 
 <div class="container container-main">
@@ -34,7 +42,7 @@
 
 <?php
 	if ($_SESSION['account_created'] == 1) { ?>
-			<span style="color: green">Account created! Please login.</span>
+			<span class="signup-success">Account created! Please login.</span>
 	<?php }
 	
 	// Unset variable so message doesn't stick around (eg when refreshing page)
@@ -57,7 +65,7 @@
 			
 			<?php // Display error messages
 			if (isset($_SESSION['username_exists']) && ($_SESSION['username_exists'] == 0) || isset($_SESSION['password_incorrect'])) { ?>
-					<span style="color: red">Incorrect username or password</span>
+					<span class="login-error">Incorrect username or password</span>
 			 <?php }
 				 unset($_SESSION['username_exists']);
 				 unset($_SESSION['password_incorrect']); 

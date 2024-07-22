@@ -19,8 +19,7 @@ class Rating {
     $statement->execute();
   }
 
-  // why am i suddenly using camelcase
-  public function getRatings($movie) {
+  public function get_ratings($movie) {
     $db = db_connect();
     $statement = $db->prepare("SELECT u.username, r.rating, r.date_added
       FROM ratings as r
@@ -34,7 +33,8 @@ class Rating {
     return $rows;
   }
 
-  public function getUserRating($user_id, $movie) {
+  // A user's rating for a movie
+  public function get_user_rating($user_id, $movie) {
     $db = db_connect();
     $statement = $db->prepare("SELECT rating FROM ratings WHERE user_id = :user_id AND movie = :movie");
     $statement->bindParam(':user_id', $user_id);
@@ -44,6 +44,7 @@ class Rating {
     return $row;
   }
 
+  // All movies that a user has rated
   public function get_user_all_ratings($user_id) {
     $db = db_connect();
     $statement = $db->prepare("SELECT * FROM ratings 

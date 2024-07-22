@@ -29,7 +29,7 @@ class Login extends Controller {
 			else {
 				$_SESSION['password_incorrect'] = 1;
 				if(isset($_SESSION['failedAuth'])) {
-					$_SESSION['failedAuth'] ++; //increment
+					$_SESSION['failedAuth'] ++;
 				} 
 				else {
 					$_SESSION['failedAuth'] = 1;

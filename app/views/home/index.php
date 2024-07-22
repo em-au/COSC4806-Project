@@ -1,4 +1,4 @@
-<?php require_once 'app/views/templates/headerAll.php'?> <!-- CHANGE HEADER -->
+<?php require_once 'app/views/templates/headerAll.php'?> 
 
 <style>
     .container-main {
@@ -38,7 +38,7 @@
 <div class="container container-main">
     <h1 class="title">Film Rate</h1>
     <div class="row">
-      <div class="col-sm-auto"> <!-- can try col-8 and center -->
+      <div class="col-sm-auto"> 
         <form action="/movie/search" method="post" style="width: 300px">
           <fieldset>
             <div class="form-group d-flex gap-2 style="text-align: left">
@@ -73,7 +73,7 @@
             <div class="d-flex justify-content-center" style="margin-bottom: 16px"><i class="fa-solid fa-magnifying-glass fa-3x" style="color: #f0327b;"></i></div>
             <h5 class="card-title">Search for movies</h5>
             <p class="card-text">
-                Look up your favourite movies and see more information</p>
+                Look up your favourite movies and find more information</p>
           </div>
         </div>
       </div>

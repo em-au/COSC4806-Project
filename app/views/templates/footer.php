@@ -8,7 +8,6 @@
         color: #b5b5b5;
         width:100%"
     }
-
 </style>
 
 <footer class="footer" 

@@ -21,6 +21,10 @@
     .form-group {
         margin-bottom: 20px;
     }
+
+    .signup-error {
+        color: #f0327b;
+    }
 </style>
 
 <div class="container container-main">
@@ -50,13 +54,13 @@
               </div>
             <?php // Display error messages
             if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == 1) { ?>
-              <span style="color: red">Username already taken</span>
+              <div class="signup-error">Username already taken</div>
             <?php }
             else if ($_SESSION['password_mismatch'] == 1) { ?>
-                <span style="color: red">Passwords do not match</span>
+                <div class="signup-error">Passwords do not match</div>
               <?php }
               else if ($_SESSION['password_too_short'] == 1) { ?>
-                <span style="color: red">Password must be at least 8 characters</span>
+                <div class="signup-error">Password must be at least 8 characters</div>
               <?php }
                 // Unset variables so error messages don't persist
                 unset($_SESSION['username_exists']);
