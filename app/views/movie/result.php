@@ -30,6 +30,11 @@
         font-size: 12px;
     }
 
+    img {
+        height: 350px;
+        width: auto;
+    }
+
     .stars {
         margin-top: 10px;
         margin-bottom: 40px;
